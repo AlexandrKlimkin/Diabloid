@@ -22,6 +22,12 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         _Input.TouchGroundHit += MoveToGroundHitPoint;
     }
 
+    private void Update() {
+        if (Input.GetKey(KeyCode.D)) {
+            Owner.TakeDamage(new Damage(10));
+        }
+    }
+
     private void MoveToGroundHitPoint(Vector3 point) {
         MoveController.MoveToPoint(point);
     }

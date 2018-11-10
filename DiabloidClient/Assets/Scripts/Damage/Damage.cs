@@ -5,7 +5,11 @@ using UnityEngine;
 public struct Damage {
     public Actor Instigator;
     public float Amount;
-    public DamageType Type;
+
+    public Damage(float amount, Actor instigator = null) {
+        Amount = amount;
+        Instigator = instigator;
+    }
 }
 
 public enum DamageType {  }

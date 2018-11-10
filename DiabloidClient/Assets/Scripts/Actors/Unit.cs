@@ -8,6 +8,7 @@ public class Unit : Actor {
     public AttackController AttackController { get; private set; }
 
     protected override void Awake() {
+        base.Awake();
         MoveController = GetComponent<MoveController>();
         AttackController = GetComponentInChildren<AttackController>();
     }
