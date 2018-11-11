@@ -8,7 +8,7 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
     public const float CameraRayLength = 100f;
 
     public event Action<Vector3> TouchGroundHit;
-    public event Action<RaycastHit> TouchActorHit;
+    public event Action<Actor> TouchActorHit;
 
     public RaycastHit CameraRaycastHit {
         get {
@@ -35,9 +35,10 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
                     if (TouchGroundHit != null)
                         TouchGroundHit(hit.point);
                 }
-                else if (hitObj.layer == Constants.Layers.Masks.Actor) {
+                else if (Constants.Layers.Masks.Actor == (Constants.Layers.Masks.Actor | (1 << hitObj.layer))) {
+                    var actor = hit.collider.gameObject.GetComponentInChildren<Actor>();
                     if (TouchActorHit != null)
-                        TouchActorHit(hit);
+                        TouchActorHit(actor);
                 }
             }
 

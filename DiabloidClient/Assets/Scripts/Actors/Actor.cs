@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor : MonoBehaviour, IDamagable {
+public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
 
     public Animator Animator { get; private set; }
 
@@ -15,12 +15,14 @@ public class Actor : MonoBehaviour, IDamagable {
 
     public bool Dead { get; private set; }
 
+    public Vector3 LookPosition { get { return transform.position; } }
+
     protected virtual void Awake() {
         Animator = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Start() {
-        Health = 1f;
+        Health = 100f;
     }
 
     public virtual void TakeDamage(Damage damage) {
@@ -36,6 +38,7 @@ public class Actor : MonoBehaviour, IDamagable {
     }
 
     public virtual void Die() {
+        Dead = true;
         if (OnDeath != null)
             OnDeath();
         if(Animator != null)
