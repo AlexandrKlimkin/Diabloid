@@ -25,11 +25,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     private void Update() {
         if (Input.GetKey(KeyCode.D)) {
-            Owner.TakeDamage(new Damage(10));
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            MoveController.IsStopped = true;
-            //Owner.Animator.SetBool("Attack", true);
+            Owner.TakeDamage(new Damage(100));
         }
     }
 

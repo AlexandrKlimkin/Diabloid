@@ -36,7 +36,7 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
                         TouchGroundHit(hit.point);
                 }
                 else if (Constants.Layers.Masks.Actor == (Constants.Layers.Masks.Actor | (1 << hitObj.layer))) {
-                    var actor = hit.collider.gameObject.GetComponentInChildren<Actor>();
+                    var actor = hit.collider.gameObject.GetComponentInParent<Actor>();
                     if (TouchActorHit != null)
                         TouchActorHit(actor);
                 }

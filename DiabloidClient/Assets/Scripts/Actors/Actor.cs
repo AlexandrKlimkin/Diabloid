@@ -8,7 +8,8 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     public Animator Animator { get; private set; }
 
     public virtual float MaxHealth { get; protected set; }
-    public virtual float Health { get; protected set; }
+    public virtual float Health { get { return _Health; } protected set { _Health = value; } }
+    public float _Health;
 
     public event Action OnDamageTake;
     public event Action OnDeath;

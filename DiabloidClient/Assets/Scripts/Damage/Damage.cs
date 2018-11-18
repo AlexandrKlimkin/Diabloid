@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Damage {
+public class Damage {
     public Actor Instigator;
     public float Amount;
 

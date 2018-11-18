@@ -26,7 +26,7 @@ public class MoveController : MonoBehaviour {
     }
     public bool IsMoving {
         get {
-            return !IsStopped && Velocity != Vector3.zero; 
+            return CanMove && !IsStopped && Velocity != Vector3.zero; 
         }
     }
 
