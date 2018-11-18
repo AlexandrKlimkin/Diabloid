@@ -28,8 +28,8 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             Owner.TakeDamage(new Damage(10));
         }
         if (Input.GetKey(KeyCode.S)) {
-            MoveController.Agent.isStopped = true;
-            Owner.Animator.SetBool("Attack", true);
+            MoveController.IsStopped = true;
+            //Owner.Animator.SetBool("Attack", true);
         }
     }
 
@@ -40,6 +40,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     private void AttackTarget(Actor actor) {
         AttackController.Target = actor;
+        MoveController.IsStopped = true;
     }
 
     protected override void OnDestroy() {

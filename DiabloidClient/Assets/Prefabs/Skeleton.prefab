@@ -1079,7 +1079,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1598639613443276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.59, y: 0, z: 9.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4001836777347216}
@@ -1250,7 +1250,7 @@ Animator:
   m_GameObject: {fileID: 1773315129008906}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5a35c5f0a89b9654d897ccd7c8f81bd0, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3ee15cca326bb75459516576489b6217, type: 2}
+  m_Controller: {fileID: 9100000, guid: d3ac200bd6aef2045bd5222c87ec981c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1258,6 +1258,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114076023472703144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1269,6 +1270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6183f326610db4c8a143c61dbcb60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 5
+  AngularSpeed: 1080
 --- !u!114 &114431743489561522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1280,6 +1283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0008a4d43454d964fb98d0a7f1056d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
+  Range: 0
+  ReloadTime: 0
 --- !u!114 &114813532997960382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1312,9 +1318,11 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ed14df0368fe53543907335c0e3902c6, type: 2}
   m_StaticBatchInfo:
@@ -1327,6 +1335,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1357,9 +1366,11 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: ed14df0368fe53543907335c0e3902c6, type: 2}
   m_StaticBatchInfo:
@@ -1372,6 +1383,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

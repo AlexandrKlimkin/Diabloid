@@ -17,6 +17,7 @@ public class Unit : Actor {
     
     public override void Die() {
         base.Die();
-        Collider.enabled = false;
+        if(Collider != null)
+            Collider.enabled = false;
     }
 }

@@ -5,8 +5,19 @@ using UnityEngine.AI;
 
 public class MoveController : MonoBehaviour {
 
+    public float Speed = 5f;
+    public float AngularSpeed = 1080f;
+    public Vector3 Velocity { get; private set; }
+    public bool IsStopped { get; set; }
+    public Vector3 DestinationPoint { get; private set; }
+    private bool _DestinationPointReached;
+    private Vector3 _TargetPathPoint;
+    private int _TargetPathPointIndex;
+    private Quaternion _TargetRotation;
+
     public Unit Owner { get; private set; }
-    public NavMeshAgent Agent { get; private set; }
+
+    public NavMeshPath Path { get; private set; }
 
     public bool CanMove {
         get {
@@ -15,55 +26,80 @@ public class MoveController : MonoBehaviour {
     }
     public bool IsMoving {
         get {
-            return !Agent.isStopped && Agent.velocity != Vector3.zero; 
+            return !IsStopped && Velocity != Vector3.zero; 
         }
     }
 
     private void Awake() {
         Owner = GetComponent<Unit>();
-        Agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start() {
+        Path = new NavMeshPath();
+        _TargetRotation = transform.rotation;
+        IsStopped = true;
         Owner.OnDeath += OnOwnerDeath;
-        //Agent.updateRotation = false;
     }
 
     private void Update() {
         if (Owner.Dead)
             return;
-        //if(Agent.velocity != Vector3.zero)
-        //    Agent.transform.rotation = Quaternion.LookRotation(Agent.velocity, Vector3.up);
+        MoveAlongPath();
+        RotateUnit();
         UpdateAnimator();
+        for (int i = 0; i < Path.corners.Length - 1; i++)
+            Debug.DrawLine(Path.corners[i], Path.corners[i + 1], Color.red);
     }
 
     public void MoveToPoint(Vector3 point) {
-        if (!CanMove)
+        IsStopped = false;
+        var havePath = NavMesh.CalculatePath(transform.position, point, NavMesh.AllAreas, Path);
+        if (havePath) {
+            _DestinationPointReached = false;
+            DestinationPoint = Path.corners[Path.corners.Length - 1];
+            _TargetPathPointIndex = 1;
+            _TargetPathPoint = Path.corners[_TargetPathPointIndex];
+        }
+    }
+
+    private void MoveAlongPath() {
+        if (_DestinationPointReached || IsStopped)
             return;
-        Agent.isStopped = false;
-        Agent.SetDestination(point);
+        var direction = _TargetPathPoint - transform.position;
+        var sqrDistToTargetPoint = Vector3.SqrMagnitude(direction);
+        if (sqrDistToTargetPoint > 0.1f) {
+            Velocity = direction.normalized * Speed * Time.deltaTime;
+        }
+        else {
+            if(_TargetPathPointIndex < Path.corners.Length - 1) {
+                _TargetPathPointIndex++;
+                _TargetPathPoint = Path.corners[_TargetPathPointIndex];
+            }
+            else {
+                _DestinationPointReached = true;
+                Velocity = Vector3.zero;
+            }
+        }
+        transform.position += Velocity;
     }
 
-    public void ForceStop() {
-        Agent.isStopped = true;
-    }
-
-    public void ForceLookAt(Quaternion rotation) {
-        Agent.transform.rotation = rotation;
+    private void RotateUnit() {
+        if (IsMoving)
+            _TargetRotation = Quaternion.LookRotation(Velocity, Vector3.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, _TargetRotation, AngularSpeed * Time.deltaTime);
     }
 
     public void ForceLookAt(Actor actor) {
-        var view = Vector3.Scale(actor.transform.position - Agent.transform.position, new Vector3(1,0,1));
-        Agent.transform.rotation = Quaternion.LookRotation(view, Vector3.up);
+        var view = Vector3.Scale(actor.transform.position - transform.position, new Vector3(1, 0, 1));
+        _TargetRotation = Quaternion.LookRotation(view, Vector3.up);
     }
 
     public void UpdateAnimator() {
-        Owner.Animator.SetFloat("Speed", Agent.velocity.magnitude);
+        Owner.Animator.SetBool("Moving", IsMoving);
     }
 
     private void OnOwnerDeath() {
-        ForceStop();
-        Agent.enabled = false;
+        IsStopped = true;
     }
 
     private void OnDestroy() {
