@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour {
 
-    public float Damage;
-    public float Range;
-    public float ReloadTime;
-    private float _CoolDownTime;
-    private float _SqrRange;
+    //public float Damage;
+    //public float Range;
+    //public float ReloadTime;
+    //private float _CoolDownTime;
+    //private float _SqrRange;
     private Actor _Target;
-
 
     public Unit Owner { get; private set; }
     public MoveController MoveController { get; private set; }
@@ -28,16 +27,17 @@ public class AttackController : MonoBehaviour {
         }
     }
     public float SqrDistanceToTarget { get; private set; }
-    public bool TargetInRange { get { return Target != null && SqrDistanceToTarget <= _SqrRange; } }
+    public bool TargetInRange { get { return Target != null && SqrDistanceToTarget <= Weapon.SqrRange; } }
     public bool CanAttack { get { return !Owner.Dead && Target != null; } }
 
     private void Awake() {
         Owner = GetComponentInParent<Unit>();
+        Weapon = GetComponent<Weapon>();
     }
 
     private void Start() {
         MoveController = Owner.MoveController;
-        _SqrRange = Range * Range;
+        //_SqrRange = Range * Range;
         Owner.OnDeath += OnOwnerDeath;
     }
 
@@ -53,22 +53,15 @@ public class AttackController : MonoBehaviour {
             return;
         if(TargetInRange) {
             MoveController.ForceLookAt(Target);
-            if (Time.time >= _CoolDownTime) {
-                MoveController.IsStopped = true;
-                Owner.Animator.SetTrigger("Attack");
-                _CoolDownTime = Time.time + ReloadTime;
-            }
+            Weapon.Attack();
         } else {
             if (MoveController != null)
                 MoveController.MoveToPoint(target.transform.position);
         }         
     }
 
-    public void PerformAttack() {
-        if (Target == null)
-            return;
-        var damage = new Damage(Damage, Owner);
-        Target.TakeDamage(damage);
+    public void PerformAttackk() {
+        Weapon.PerformAttack();
     }
 
     private void OnOwnerDeath() {

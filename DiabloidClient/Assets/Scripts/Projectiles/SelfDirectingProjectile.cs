@@ -11,18 +11,19 @@ public class SelfDirectingProjectile : Projectile<SelfDirectingProjectileInit> {
             gameObject.SetActive(false);
             return;
         }
-        var direction = Target.transform.position - transform.position;
+        var direction = Target.PointToFire.position - transform.position;
         var sqrDistanceToTarget = Vector3.SqrMagnitude(direction);
-        if(sqrDistanceToTarget < 0.01f) {
+        if(sqrDistanceToTarget > 0.1f) {
             _Velocity = direction.normalized * Speed;
             transform.position += _Velocity * time;
         } else {
             Hit();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
         }
     }
 
-    protected override void Initialize(SelfDirectingProjectileInit parametrs) {
+    public override void Initialize(SelfDirectingProjectileInit parametrs) {
         Damage = parametrs.Damage;
         Target = parametrs.Target;
         _Initialized = true;

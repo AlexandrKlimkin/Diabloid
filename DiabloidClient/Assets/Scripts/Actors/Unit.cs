@@ -29,5 +29,7 @@ public class Unit : Actor {
             Rigidbody.detectCollisions = false;
             Rigidbody.isKinematic = true;
         }
+        AttackController.enabled = false;
+        MoveController.enabled = false;
     }
 }

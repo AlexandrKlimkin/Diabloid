@@ -11,13 +11,15 @@ public abstract class Projectile<T> : MonoBehaviour where T: ProjectileInit {
 
 	protected virtual void Update () {
         if (!_Initialized) {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
             return;
         }
         SimulateStep(Time.deltaTime);
+        if (_Velocity != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(_Velocity);
 	}
 
-    protected abstract void Initialize(T parameters);
+    public abstract void Initialize(T parameters);
 
     protected abstract void SimulateStep(float time);
 

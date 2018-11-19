@@ -10,6 +10,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     public virtual float MaxHealth { get; protected set; }
     public virtual float Health { get { return _Health; } protected set { _Health = value; } }
     public float _Health;
+    public Transform PointToFire { get; private set; }
 
     public event Action OnDamageTake;
     public event Action OnDeath;
@@ -20,6 +21,13 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
 
     protected virtual void Awake() {
         Animator = GetComponentInChildren<Animator>();
+        PointToFire = transform.Find("PointToFire");
+        if (PointToFire == null) {
+            PointToFire = new GameObject("PointToFire").transform;
+            PointToFire.SetParent(transform);
+            PointToFire.localPosition = Vector3.zero;
+            PointToFire.localRotation = Quaternion.identity;
+        }
     }
 
     protected virtual void Start() {
