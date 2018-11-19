@@ -26,8 +26,11 @@ public abstract class Weapon : MonoBehaviour {
             Controller.MoveController.IsStopped = true;
             Controller.Owner.Animator.SetTrigger("Attack");
             _CoolDownTime = Time.time + ReloadTime;
+            OnStartAttack();
         }
     }
+
+    public abstract void OnStartAttack();
 
     public abstract void PerformAttack();
 }

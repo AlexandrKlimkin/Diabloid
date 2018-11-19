@@ -7,6 +7,8 @@ public class RangeWeapon : Weapon {
     public SelfDirectingProjectile ProjectilePrefab;
     public Transform ProjectileSpawnPoint;
 
+    public override void OnStartAttack() { }
+
     public override void PerformAttack() {
         if (Controller.Target == null)
             return;

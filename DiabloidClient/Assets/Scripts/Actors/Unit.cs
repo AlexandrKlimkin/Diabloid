@@ -36,10 +36,13 @@ public class Unit : Actor {
     public override void TakeDamage(Damage damage) {
         base.TakeDamage(damage);
         if (!Dead) {
-            if (damage.Type == DamageType.Middle) {
-                if (Animator != null) {
+            if (Animator != null) {
+                if (damage.Type == DamageType.Middle) {
                     Animator.SetTrigger("TakeMiddleDamage");
                     MoveController.StanOnTime(1f);
+                } else if(damage.Type == DamageType.Big) {
+                    Animator.SetTrigger("TakeBigDamage");
+                    MoveController.StanOnTime(2.5f);
                 }
             }
         }
