@@ -25,7 +25,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
         if (PointToFire == null) {
             PointToFire = new GameObject("PointToFire").transform;
             PointToFire.SetParent(transform);
-            PointToFire.localPosition = Vector3.zero;
+            PointToFire.localPosition = Vector3.up;
             PointToFire.localRotation = Quaternion.identity;
         }
     }
@@ -52,5 +52,6 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
             OnDeath();
         if(Animator != null)
             Animator.SetTrigger("Die");
+
     }
 }

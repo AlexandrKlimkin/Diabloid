@@ -21,9 +21,12 @@ public class MoveController : MonoBehaviour {
 
     public bool CanMove {
         get {
-            return !Owner.Dead;
+            return !Owner.Dead && !Staned;
         }
     }
+
+    public bool Staned { get; private set; }
+
     public bool IsMoving {
         get {
             return CanMove && !IsStopped && Velocity != Vector3.zero; 
@@ -63,7 +66,7 @@ public class MoveController : MonoBehaviour {
     }
 
     private void MoveAlongPath() {
-        if (_DestinationPointReached || IsStopped)
+        if (_DestinationPointReached || !CanMove || IsStopped)
             return;
         var direction = _TargetPathPoint - transform.position;
         var sqrDistToTargetPoint = Vector3.SqrMagnitude(direction);
@@ -92,6 +95,16 @@ public class MoveController : MonoBehaviour {
     public void ForceLookAt(Actor actor) {
         var view = Vector3.Scale(actor.transform.position - transform.position, new Vector3(1, 0, 1));
         _TargetRotation = Quaternion.LookRotation(view, Vector3.up);
+    }
+
+    public void StanOnTime(float time) {
+        StartCoroutine(StanOnTimeRoutine(time));
+    }
+
+    private IEnumerator StanOnTimeRoutine(float time) {
+        Staned = true;
+        yield return new WaitForSeconds(time);
+        Staned = false;
     }
 
     public void UpdateAnimator() {

@@ -52,7 +52,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private void UpdateDistanceToPlayer() {
         Vector3 playerPos = PlayerController.Instance.Owner.transform.position;
-        _BehaviorTree.Blackboard["playerPos"] = playerPos;
-        _BehaviorTree.Blackboard["SqrDistanceToPlayer"] = Vector3.SqrMagnitude(playerPos - _Owner.transform.position);
+        _Blackboard["playerPos"] = playerPos;
+        _Blackboard["SqrDistanceToPlayer"] = Vector3.SqrMagnitude(playerPos - _Owner.transform.position);
     }
 }

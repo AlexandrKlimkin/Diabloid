@@ -32,4 +32,16 @@ public class Unit : Actor {
         AttackController.enabled = false;
         MoveController.enabled = false;
     }
+
+    public override void TakeDamage(Damage damage) {
+        base.TakeDamage(damage);
+        if (!Dead) {
+            if (damage.Type == DamageType.Middle) {
+                if (Animator != null) {
+                    Animator.SetTrigger("TakeMiddleDamage");
+                    MoveController.StanOnTime(1f);
+                }
+            }
+        }
+    }
 }
