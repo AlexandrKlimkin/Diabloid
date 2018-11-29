@@ -9,7 +9,7 @@ public class RangeWeapon : Weapon {
 
     public override void OnStartAttack() { }
 
-    public override void PerformAttack() {
+    public override void Hit() {
         if (Controller.Target == null)
             return;
         var projectile = Instantiate(ProjectilePrefab, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);

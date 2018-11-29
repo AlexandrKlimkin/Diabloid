@@ -9,6 +9,8 @@ public class Unit : Actor {
     public AttackController AttackController { get; private set; }
     public SphereCollider SelectCollider { get; private set; }
     public Collider Collider { get; private set; }
+    public static List<Unit> ActiveUnits { get; private set; }
+    public int TeamIndex;
 
     protected override void Awake() {
         base.Awake();
@@ -17,6 +19,9 @@ public class Unit : Actor {
         Rigidbody = GetComponent<Rigidbody>();
         SelectCollider = GetComponentInChildren<SphereCollider>();
         Collider = GetComponent<Collider>();
+        if (ActiveUnits == null)                 //КОСТЫЛЬ
+            ActiveUnits = new List<Unit>();
+        ActiveUnits.Add(this);
     }
     
     public override void Die() {
@@ -31,6 +36,7 @@ public class Unit : Actor {
         }
         AttackController.enabled = false;
         MoveController.enabled = false;
+        ActiveUnits.Remove(this);
     }
 
     public override void TakeDamage(Damage damage) {

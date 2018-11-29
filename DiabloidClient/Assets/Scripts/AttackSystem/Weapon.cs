@@ -18,19 +18,19 @@ public abstract class Weapon : MonoBehaviour {
     }
 
     protected virtual void Awake() {
-        Controller = GetComponent<AttackController>();
+        Controller = GetComponentInParent<AttackController>();
     }
 
-    public virtual void Attack() {
-        if (Time.time >= _CoolDownTime) {
-            Controller.MoveController.IsStopped = true;
-            Controller.Owner.Animator.SetTrigger("Attack");
+    public virtual bool Attack() {
+        if (Reloaded) {
             _CoolDownTime = Time.time + ReloadTime;
             OnStartAttack();
+            return true;
         }
+        return false;
     }
 
     public abstract void OnStartAttack();
 
-    public abstract void PerformAttack();
+    public abstract void Hit();
 }
