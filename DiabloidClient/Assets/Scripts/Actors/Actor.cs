@@ -25,7 +25,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
         if (PointToFire == null) {
             PointToFire = new GameObject("PointToFire").transform;
             PointToFire.SetParent(transform);
-            PointToFire.localPosition = Vector3.up;
+            PointToFire.localPosition = Vector3.up / transform.localScale.y;
             PointToFire.localRotation = Quaternion.identity;
         }
     }

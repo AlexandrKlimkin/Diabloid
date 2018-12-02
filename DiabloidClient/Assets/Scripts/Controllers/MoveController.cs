@@ -15,9 +15,13 @@ public class MoveController : MonoBehaviour {
     private int _TargetPathPointIndex;
     private Quaternion _TargetRotation;
 
+    private const float _MIDDLE_DMG_STAN_TIME = 1.5f;
+
     public Unit Owner { get; private set; }
 
     public NavMeshPath Path { get; private set; }
+
+    private Coroutine _StanRoutine;
 
     public bool CanMove {
         get {
@@ -34,14 +38,15 @@ public class MoveController : MonoBehaviour {
     }
 
     private void Awake() {
-        Owner = GetComponent<Unit>();
+        Owner = GetComponentInParent<Unit>();
     }
 
     private void Start() {
         Path = new NavMeshPath();
-        _TargetRotation = transform.rotation;
+        _TargetRotation = Owner.transform.rotation;
         IsStopped = true;
         Owner.OnDeath += OnOwnerDeath;
+        Owner.Animator.SetFloat("StanTime", _MIDDLE_DMG_STAN_TIME);
     }
 
     private void Update() {
@@ -56,7 +61,7 @@ public class MoveController : MonoBehaviour {
 
     public void MoveToPoint(Vector3 point) {
         IsStopped = false;
-        var havePath = NavMesh.CalculatePath(transform.position, point, NavMesh.AllAreas, Path);
+        var havePath = NavMesh.CalculatePath(Owner.transform.position, point, NavMesh.AllAreas, Path);
         if (havePath) {
             _DestinationPointReached = false;
             DestinationPoint = Path.corners[Path.corners.Length - 1];
@@ -68,7 +73,7 @@ public class MoveController : MonoBehaviour {
     private void MoveAlongPath() {
         if (_DestinationPointReached || !CanMove || IsStopped)
             return;
-        var direction = _TargetPathPoint - transform.position;
+        var direction = _TargetPathPoint - Owner.transform.position;
         var sqrDistToTargetPoint = Vector3.SqrMagnitude(direction);
         if (sqrDistToTargetPoint > 0.1f) {
             Velocity = direction.normalized * Speed * Time.deltaTime;
@@ -83,29 +88,32 @@ public class MoveController : MonoBehaviour {
                 Velocity = Vector3.zero;
             }
         }
-        transform.position += Velocity;
+        Owner.transform.position += Velocity;
     }
 
     private void RotateUnit() {
         if (IsMoving)
             _TargetRotation = Quaternion.LookRotation(Velocity, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, _TargetRotation, AngularSpeed * Time.deltaTime);
+        Owner.transform.rotation = Quaternion.Lerp(Owner.transform.rotation, _TargetRotation, AngularSpeed * Time.deltaTime);
     }
 
     public void ForceLookAt(Actor actor) {
         if (actor == null)
             return;
-        var view = Vector3.Scale(actor.transform.position - transform.position, new Vector3(1, 0, 1));
+        var view = Vector3.Scale(actor.transform.position - Owner.transform.position, new Vector3(1, 0, 1));
         _TargetRotation = Quaternion.LookRotation(view, Vector3.up);
     }
 
-    public void StanOnTime(float time) {
-        StartCoroutine(StanOnTimeRoutine(time));
+    public void OnHit() {
+        if (_StanRoutine != null)
+            StopCoroutine(_StanRoutine);
+        _StanRoutine = StartCoroutine(StanRoutine());
     }
-
-    private IEnumerator StanOnTimeRoutine(float time) {
+    
+    private IEnumerator StanRoutine() {
         Staned = true;
-        yield return new WaitForSeconds(time);
+        Velocity = Vector3.zero;
+        yield return new WaitForSeconds(_MIDDLE_DMG_STAN_TIME);
         Staned = false;
     }
 

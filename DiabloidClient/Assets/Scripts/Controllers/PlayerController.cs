@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : SingletonBehaviour<PlayerController> {
 
-    public Unit Owner { get; private set; }
+    public Unit Unit { get; private set; }
     public MoveController MoveController { get; private set; }
     public AttackController AttackController { get; private set; }
 
@@ -12,12 +12,12 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     protected override void Awake () {
         base.Awake();
-        Owner = GetComponent<Unit>();
-        MoveController = GetComponent<MoveController>();
+        Unit = GetComponent<Unit>();
+        MoveController = GetComponentInChildren<MoveController>();
     }
 	
     protected void Start() {
-        AttackController = Owner.AttackController;
+        AttackController = Unit.AttackController;
         _Input = InputSystem.Instance;
         _Input.TouchGroundHit += MoveToGroundHitPoint;
         _Input.TouchActorHit += AttackTarget;
@@ -25,8 +25,9 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     private void Update() {
         if (Input.GetKey(KeyCode.D)) {
-            Owner.TakeDamage(new Damage(100));
+            Unit.TakeDamage(new Damage(100));
         }
+        PursueOrAttackTarget();
     }
 
     private void MoveToGroundHitPoint(Vector3 point) {
@@ -36,7 +37,20 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     private void AttackTarget(Actor actor) {
         AttackController.Target = actor;
-        MoveController.IsStopped = true;
+    }
+
+    private void PursueOrAttackTarget() {
+        if(AttackController.Target != null) {
+            var sqrDistToTarget = Unit.AttackController.SqrDistanceToTarget;
+            if (sqrDistToTarget < Unit.AttackController.Weapon.SqrRange) {
+                Unit.AttackController.Attack();
+                Unit.MoveController.IsStopped = true;
+            }
+            else {
+                var targetPos = Unit.AttackController.Target.transform.position;
+                Unit.MoveController.MoveToPoint(targetPos);
+            }
+        }
     }
 
     protected override void OnDestroy() {

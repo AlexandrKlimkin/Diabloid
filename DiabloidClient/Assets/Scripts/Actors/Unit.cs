@@ -14,7 +14,7 @@ public class Unit : Actor {
 
     protected override void Awake() {
         base.Awake();
-        MoveController = GetComponent<MoveController>();
+        MoveController = GetComponentInChildren<MoveController>();
         AttackController = GetComponentInChildren<AttackController>();
         Rigidbody = GetComponent<Rigidbody>();
         SelectCollider = GetComponentInChildren<SphereCollider>();
@@ -45,10 +45,10 @@ public class Unit : Actor {
             if (Animator != null) {
                 if (damage.Type == DamageType.Middle) {
                     Animator.SetTrigger("TakeMiddleDamage");
-                    MoveController.StanOnTime(1f);
+                    MoveController.OnHit();
                 } else if(damage.Type == DamageType.Big) {
                     Animator.SetTrigger("TakeBigDamage");
-                    MoveController.StanOnTime(2.5f);
+                    MoveController.OnHit();
                 }
             }
         }

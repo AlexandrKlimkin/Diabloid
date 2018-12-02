@@ -33,50 +33,34 @@ public class AttackController : MonoBehaviour {
     public float SqrDistanceToTarget { get; private set; }
     public bool TargetInRange { get { return Target != null && SqrDistanceToTarget <= Weapon.SqrRange; } }
     public bool CanAttack { get { return !Owner.Dead && Target != null; } }
-    public bool Attacking { get; set; }
 
     private void Awake() {
-        Owner = GetComponent<Unit>();
+        Owner = GetComponentInParent<Unit>();
         Weapon = GetComponentInChildren<Weapon>();
     }
 
     private void Start() {
         MoveController = Owner.MoveController;
         Owner.OnDeath += OnOwnerDeath;
-        Attacking = false;
     }
 
     private void Update() {
         if (Owner.Dead)
             return;
         SqrDistanceToTarget = Target != null ? Vector3.SqrMagnitude(transform.position - Target.transform.position) : float.PositiveInfinity;
-        if (Attacking) {
-            MoveController.ForceLookAt(Target);
-        }
     }
 
-    public void PerformAttack() {
-        if (!CanAttack || Attacking)
+    public void Attack() {
+        MoveController.ForceLookAt(Target);
+        if (!CanAttack || !Weapon.Reloaded)
             return;
-        StartCoroutine(AttackRoutine());
-    }
-
-    private IEnumerator AttackRoutine() {
-        if (Weapon.Attack()) {
-            Attacking = true;
-            StartCoroutine(HitRoutine());
+        if (Weapon.Reloaded) {
+            Weapon.Attack();
             Owner.Animator.SetTrigger("Attack");
-            yield return new WaitForSeconds(AttackTime);
-            Attacking = false;
         }
     }
 
-    private IEnumerator HitRoutine() {
-        yield return new WaitForSeconds(HitTime);
-        PerformHit();
-    }
-
-    private void PerformHit() {
+    public void PerformHit() {
         Weapon.Hit();
     }
 
@@ -106,12 +90,10 @@ public class AttackController : MonoBehaviour {
 
     private void OnOwnerDeath() {
         Target = null;
-        //SqrDistanceToTarget = float.PositiveInfinity;
     }
 
     private void OnTargetDeath() {
         Target = null;
-        //SqrDistanceToTarget = float.PositiveInfinity;
     }
 
     private void OnDestroy() {

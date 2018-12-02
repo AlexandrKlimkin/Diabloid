@@ -6,17 +6,14 @@ using UnityEngine;
 public class AttackTargetTask : UnitTask {
 
     public override TaskStatus Run() {
-        if ((Unit.AttackController.Target == null || Unit.AttackController.Target.Dead) && !Unit.AttackController.Attacking) {
-            //Unit.AttackController.Attacking = false;
+        if ((Unit.AttackController.Target == null || Unit.AttackController.Target.Dead)) {
             return TaskStatus.Success;
         }
         var sqrDistToTarget = Unit.AttackController.SqrDistanceToTarget;
-        if (sqrDistToTarget > Unit.AttackController.Weapon.SqrRange && !Unit.AttackController.Attacking) {
-            //Unit.AttackController.Attacking = false;
+        if (sqrDistToTarget > Unit.AttackController.Weapon.SqrRange) {
             return TaskStatus.Failure;
         }
-        if(Unit.AttackController.Weapon.Reloaded)
-            Unit.AttackController.PerformAttack();
+        Unit.AttackController.Attack();
         return TaskStatus.Running;
     }
 }

@@ -21,13 +21,9 @@ public abstract class Weapon : MonoBehaviour {
         Controller = GetComponentInParent<AttackController>();
     }
 
-    public virtual bool Attack() {
-        if (Reloaded) {
-            _CoolDownTime = Time.time + ReloadTime;
-            OnStartAttack();
-            return true;
-        }
-        return false;
+    public virtual void Attack() {
+        _CoolDownTime = Time.time + ReloadTime;
+        OnStartAttack();
     }
 
     public abstract void OnStartAttack();

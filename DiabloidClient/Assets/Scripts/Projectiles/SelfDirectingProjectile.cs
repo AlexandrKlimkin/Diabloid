@@ -18,8 +18,7 @@ public class SelfDirectingProjectile : Projectile<SelfDirectingProjectileInit> {
             transform.position += _Velocity * time;
         } else {
             Hit();
-            Destroy(gameObject);
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 

@@ -27,11 +27,10 @@ public class CameraBehaviour : SingletonBehaviour<CameraBehaviour> {
             return Vector3.Scale(transform.forward, new Vector3(1, 0, 1)).normalized;
         }
     }
-    //public bool Initialized { get; private set; }
 
 
     void Start() {
-        Target = PlayerController.Instance.Owner;
+        Target = PlayerController.Instance.Unit;
     }
 
     void Update() {

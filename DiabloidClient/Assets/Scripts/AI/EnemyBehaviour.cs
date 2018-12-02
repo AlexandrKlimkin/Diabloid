@@ -32,7 +32,7 @@ public class EnemyBehaviour : MonoBehaviour {
                             // the player is in our range of VisionRadius                                                                                               
                             new Action((bool _shouldCancel) => { // go towards player until playerDistance is greater than VisionRadius ( in that case, _shouldCancel will get true )
                                 if (!_shouldCancel) {
-                                    _Owner.AttackController.Target = PlayerController.Instance.Owner;
+                                    _Owner.AttackController.Target = PlayerController.Instance.Unit;
                                     return Action.Result.PROGRESS;
                                 }
                                 else {
@@ -51,7 +51,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     private void UpdateDistanceToPlayer() {
-        Vector3 playerPos = PlayerController.Instance.Owner.transform.position;
+        Vector3 playerPos = PlayerController.Instance.Unit.transform.position;
         _Blackboard["playerPos"] = playerPos;
         _Blackboard["SqrDistanceToPlayer"] = Vector3.SqrMagnitude(playerPos - _Owner.transform.position);
     }
