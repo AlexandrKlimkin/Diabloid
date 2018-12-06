@@ -241,8 +241,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4398508999700756}
   - component: {fileID: 95985792463790104}
-  - component: {fileID: 114519060052018508}
-  - component: {fileID: 114315529891727426}
+  - component: {fileID: 114402278979786078}
+  - component: {fileID: 114305613899659136}
   m_Layer: 0
   m_Name: WK_light_archer_A
   m_TagString: Untagged
@@ -3057,7 +3057,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114315529891727426
+--- !u!114 &114305613899659136
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3070,18 +3070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   AngularSpeed: 10
---- !u!114 &114408564591509886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1553031237157142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc1b62712d7b58468c4d6fa3c200e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114519060052018508
+--- !u!114 &114402278979786078
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3095,6 +3084,17 @@ MonoBehaviour:
   Range: 0
   HitTime: 0.11
   AttackTime: 0
+--- !u!114 &114408564591509886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553031237157142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bc1b62712d7b58468c4d6fa3c200e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114657046756473628
 MonoBehaviour:
   m_ObjectHideFlags: 1
