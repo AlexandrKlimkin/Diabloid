@@ -21,7 +21,6 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
 
     protected override void Awake() {
         base.Awake();
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update() {

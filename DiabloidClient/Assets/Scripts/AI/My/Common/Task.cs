@@ -43,8 +43,8 @@ namespace Tools.BehaviourTree {
                     break;
                 }
             }
-            if(this is UnitTask)
-                Debug.Log(GetType().ToString() + ": " + Status);
+            //if(this is UnitTask)
+            //    Debug.Log(GetType().ToString() + ": " + Status);
             return Status;
         }
 

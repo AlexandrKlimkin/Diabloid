@@ -6,12 +6,26 @@ using UnityEngine;
 public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
 
     public Animator Animator { get; private set; }
-
-    public virtual float MaxHealth { get; protected set; }
-    public virtual float Health { get { return _Health; } protected set { _Health = value; } }
-    public float _Health;
+    public virtual float MaxHealth { get { return _MaxHealth; } protected set { _MaxHealth = value; } }
+    [SerializeField]
+    private float _MaxHealth;
+    public virtual float Health {
+        get {
+            return _Health;
+        }
+        protected set {
+            if(_Health != value) {
+                _Health = value;
+                if (OnHealthChanged != null)
+                    OnHealthChanged();
+            }
+        }
+    }
+    public float RelativeHealth { get { return Health / MaxHealth; } }
+    private float _Health;
     public Transform PointToFire { get; private set; }
 
+    public event Action OnHealthChanged;
     public event Action OnDamageTake;
     public event Action OnDeath;
 
@@ -31,7 +45,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     }
 
     protected virtual void Start() {
-        Health = 100f;
+        Health = _MaxHealth;
     }
 
     public virtual void TakeDamage(Damage damage) {
