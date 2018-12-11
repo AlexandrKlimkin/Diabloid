@@ -1819,7 +1819,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1024027586228416}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.41, y: 0, z: 2.2}
+  m_LocalPosition: {x: 6.785, y: 0, z: 3.422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4973032460390112}
@@ -2308,6 +2308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHealth: 100
+  MiddleDamageBloodEffect: {fileID: 100004, guid: 5aac6238f52473c4ab422c13d2511616,
+    type: 2}
   TeamIndex: 0
 --- !u!114 &114417222384628230
 MonoBehaviour:
@@ -2379,6 +2381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3.5
   AngularSpeed: 10
+  MiddleDmgStanTime: 0.7
 --- !u!114 &114984032948072674
 MonoBehaviour:
   m_ObjectHideFlags: 1

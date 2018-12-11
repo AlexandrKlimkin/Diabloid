@@ -14,7 +14,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
             return _Health;
         }
         protected set {
-            if(_Health != value) {
+            if (_Health != value) {
                 _Health = value;
                 if (OnHealthChanged != null)
                     OnHealthChanged();
@@ -24,6 +24,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     public float RelativeHealth { get { return Health / MaxHealth; } }
     private float _Health;
     public Transform PointToFire { get; private set; }
+    public virtual string MiddleDamageHitEffectName { get { return "BloodSparkEffect"; } }
 
     public event Action OnHealthChanged;
     public event Action OnDamageTake;
@@ -58,6 +59,17 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
             Health = 0;
             Die();
         }
+        if (Animator != null) {
+            if (damage.Type == DamageType.Small) {
+                OnSmallDamageTake();
+            }
+            else if (damage.Type == DamageType.Middle) {
+                OnMiddleDamageTake();
+            }
+            else if (damage.Type == DamageType.Big) {
+                OnBigDamageTake();
+            }
+        }
     }
 
     public virtual void Die() {
@@ -67,5 +79,25 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
         if(Animator != null)
             Animator.SetTrigger("Die");
 
+    }
+
+    protected virtual void OnSmallDamageTake() {
+
+    }
+    protected virtual void OnMiddleDamageTake() {
+        if (!string.IsNullOrEmpty(MiddleDamageHitEffectName)) {
+            var effect = VisualEffect.GetEffect<ParentAttachedParticleEffect>(MiddleDamageHitEffectName);
+            effect.Parent = PointToFire;
+            effect.ResetLocalPosition();
+            effect.Play();
+        }
+        if (!Dead) {
+            Animator.SetTrigger("TakeMiddleDamage");
+        }
+    }
+    protected virtual void OnBigDamageTake() {
+        if (!Dead) {
+            Animator.SetTrigger("TakeBigDamage");
+        }
     }
 }

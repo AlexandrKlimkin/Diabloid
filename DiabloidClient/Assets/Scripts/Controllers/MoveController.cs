@@ -15,7 +15,7 @@ public class MoveController : MonoBehaviour {
     private int _TargetPathPointIndex;
     private Quaternion _TargetRotation;
 
-    private const float _MIDDLE_DMG_STAN_TIME = 1.5f;
+    public float MiddleDmgStanTime = 1.5f;
 
     public Unit Owner { get; private set; }
 
@@ -46,7 +46,7 @@ public class MoveController : MonoBehaviour {
         _TargetRotation = Owner.transform.rotation;
         IsStopped = true;
         Owner.OnDeath += OnOwnerDeath;
-        Owner.Animator.SetFloat("StanTime", _MIDDLE_DMG_STAN_TIME);
+        //Owner.Animator.SetFloat("StanTime", MiddleDmgStanTime);
     }
 
     private void Update() {
@@ -107,13 +107,13 @@ public class MoveController : MonoBehaviour {
     public void OnHit() {
         if (_StanRoutine != null)
             StopCoroutine(_StanRoutine);
-        _StanRoutine = StartCoroutine(StanRoutine());
+        _StanRoutine = StartCoroutine(StanRoutine(MiddleDmgStanTime));
     }
     
-    private IEnumerator StanRoutine() {
+    private IEnumerator StanRoutine(float time) {
         Staned = true;
         Velocity = Vector3.zero;
-        yield return new WaitForSeconds(_MIDDLE_DMG_STAN_TIME);
+        yield return new WaitForSeconds(time);
         Staned = false;
     }
 

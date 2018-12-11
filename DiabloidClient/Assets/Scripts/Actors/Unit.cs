@@ -39,18 +39,13 @@ public class Unit : Actor {
         ActiveUnits.Remove(this);
     }
 
-    public override void TakeDamage(Damage damage) {
-        base.TakeDamage(damage);
-        if (!Dead) {
-            if (Animator != null) {
-                if (damage.Type == DamageType.Middle) {
-                    Animator.SetTrigger("TakeMiddleDamage");
-                    MoveController.OnHit();
-                } else if(damage.Type == DamageType.Big) {
-                    Animator.SetTrigger("TakeBigDamage");
-                    MoveController.OnHit();
-                }
-            }
-        }
+    protected override void OnMiddleDamageTake() {
+        base.OnMiddleDamageTake();
+        MoveController.OnHit();
+    }
+
+    protected override void OnBigDamageTake() {
+        base.OnBigDamageTake();
+        MoveController.OnHit();
     }
 }
