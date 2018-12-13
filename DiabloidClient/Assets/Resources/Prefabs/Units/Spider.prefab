@@ -2308,8 +2308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHealth: 100
-  MiddleDamageBloodEffect: {fileID: 100004, guid: 5aac6238f52473c4ab422c13d2511616,
-    type: 2}
   TeamIndex: 0
 --- !u!114 &114417222384628230
 MonoBehaviour:
@@ -2336,7 +2334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0008a4d43454d964fb98d0a7f1056d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 10
+  Range: 15
   HitTime: 1
   AttackTime: 3
 --- !u!114 &114590721938337716

@@ -93,7 +93,7 @@ public class MoveController : MonoBehaviour {
 
     private void RotateUnit() {
         if (IsMoving)
-            _TargetRotation = Quaternion.LookRotation(Velocity, Vector3.up);
+            _TargetRotation = Quaternion.LookRotation(Vector3.Scale(Velocity, new Vector3(1, 0, 1)), Vector3.up);
         Owner.transform.rotation = Quaternion.Lerp(Owner.transform.rotation, _TargetRotation, AngularSpeed * Time.deltaTime);
     }
 

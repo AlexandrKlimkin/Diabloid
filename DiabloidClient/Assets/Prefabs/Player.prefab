@@ -1429,7 +1429,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553031237157142}
   m_LocalRotation: {x: -0, y: -0.93797976, z: 0, w: -0.34669012}
-  m_LocalPosition: {x: 6.86, y: 0, z: -4.3}
+  m_LocalPosition: {x: -76.88, y: -0.00000023841858, z: 1.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4672024570251238}
@@ -1486,7 +1486,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1716513529210422}
   m_LocalRotation: {x: -0.5392765, y: 0.44358295, z: 0.55483896, w: 0.4522928}
-  m_LocalPosition: {x: -0.017694728, y: -0.024470236, z: -0.022628121}
+  m_LocalPosition: {x: -0.017694598, y: -0.024470754, z: -0.022628121}
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
   m_Children:
   - {fileID: 4041493985649740}
@@ -2126,7 +2126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1755415508553496}
   m_LocalRotation: {x: -0.50000036, y: 0.49999964, z: 0.49999964, w: 0.50000036}
-  m_LocalPosition: {x: 0.00000023096794, y: 0.73484915, z: -0.04909431}
+  m_LocalPosition: {x: -0.00000015646215, y: 0.73484915, z: -0.049094763}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4109105943599430}
@@ -3070,6 +3070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   AngularSpeed: 10
+  MiddleDmgStanTime: 1.5
 --- !u!114 &114408564591509886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3092,7 +3093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44447aa268daa43489fb76b370cc8dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 50
+  Damage: 20
   Range: 10
   ReloadTime: 1
   ProjectileSpawnPoint: {fileID: 4974383526479372}
