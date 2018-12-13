@@ -100,4 +100,6 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
             Animator.SetTrigger("TakeBigDamage");
         }
     }
+
+    protected virtual void OnDestroy() { }
 }

@@ -11,8 +11,10 @@ public class BotAIController : AIController {
     }
 
     public override void UpdateAI() {
-        if (Unit.Dead)
+        if (Unit.Dead) {
+            this.enabled = false;
             return;
+        }
         UpdateBT();
     }
 }
