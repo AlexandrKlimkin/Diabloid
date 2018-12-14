@@ -12,11 +12,11 @@ public abstract class MonoBehaviourObjectPool<PoolType, ObjectType> : SingletonB
     protected override void Awake() {
         base.Awake();
         _Objects = new List<ObjectType>();
-        LoadPrefab(_PrefabPath);
+        LoadPrefab();
     }
 
-    protected void LoadPrefab(string path) {
-        _ObjectPrefab = Resources.Load<ObjectType>(path);
+    protected void LoadPrefab() {
+        _ObjectPrefab = Resources.Load<ObjectType>(_PrefabPath);
     }
 
     public virtual ObjectType GetObject() {

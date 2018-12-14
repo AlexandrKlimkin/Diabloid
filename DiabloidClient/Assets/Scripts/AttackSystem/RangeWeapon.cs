@@ -11,7 +11,7 @@ public class RangeWeapon : Weapon {
     public override void Hit() {
         if (Controller.Target == null)
             return;
-        var projectile = ArrowProjectilePool.Instance.GetObject();
+        var projectile = FireBallsPool.Instance.GetObject();
         projectile.transform.position = ProjectileSpawnPoint.position;
         projectile.transform.rotation = ProjectileSpawnPoint.rotation;
         var dmg = new Damage(Damage, Controller.Owner, DamageType.Middle);

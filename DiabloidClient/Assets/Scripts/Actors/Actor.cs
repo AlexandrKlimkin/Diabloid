@@ -24,7 +24,7 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     public float RelativeHealth { get { return Health / MaxHealth; } }
     private float _Health;
     public Transform PointToFire { get; private set; }
-    public virtual string MiddleDamageHitEffectName { get { return "BloodSparkEffect"; } }
+    public virtual string MiddleDamageHitEffectName { get { return /*"BloodSparkEffect"*/ "FireSplashEffect"; } }
 
     public event Action OnHealthChanged;
     public event Action OnDamageTake;
@@ -86,9 +86,11 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     }
     protected virtual void OnMiddleDamageTake() {
         if (!string.IsNullOrEmpty(MiddleDamageHitEffectName)) {
-            var effect = VisualEffect.GetEffect<ParentAttachedParticleEffect>(MiddleDamageHitEffectName);
-            effect.Parent = PointToFire;
-            effect.ResetLocalPosition();
+            var effect = VisualEffect.GetEffect<ParticleEffect>(MiddleDamageHitEffectName);
+            effect.transform.position = PointToFire.position;
+            effect.transform.rotation = PointToFire.rotation;
+            //effect.Parent = PointToFire;
+            //effect.ResetLocalPosition();
             effect.Play();
         }
         if (!Dead) {
