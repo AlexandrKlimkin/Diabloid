@@ -55,8 +55,7 @@ public class MoveController : MonoBehaviour {
         MoveAlongPath();
         RotateUnit();
         UpdateAnimator();
-        for (int i = 0; i < Path.corners.Length - 1; i++)
-            Debug.DrawLine(Path.corners[i], Path.corners[i + 1], Color.red);
+        DrawPath();
     }
 
     public void MoveToPoint(Vector3 point) {
@@ -123,6 +122,13 @@ public class MoveController : MonoBehaviour {
 
     private void OnOwnerDeath() {
         IsStopped = true;
+    }
+
+    private void DrawPath()
+    {
+        if (Path != null)
+            for (int i = 0; i < Path.corners.Length - 1; i++)
+                Debug.DrawLine(Path.corners[i], Path.corners[i + 1], Color.red);
     }
 
     private void OnDestroy() {
