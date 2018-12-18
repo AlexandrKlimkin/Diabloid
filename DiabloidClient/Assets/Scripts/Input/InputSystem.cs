@@ -9,12 +9,13 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
 
     public event Action<Vector3> TouchGroundHit;
     public event Action<Actor> TouchActorHit;
+    public event Action UseQAbility;
 
     public RaycastHit CameraRaycastHit {
         get {
             var cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Physics.Raycast(cameraRay, out hit, CameraRayLength);
+            Physics.Raycast(cameraRay, out hit, CameraRayLength, Constants.Layers.Masks.Actor + Constants.Layers.Masks.Ground);
             return hit;
         }
     }
@@ -41,6 +42,11 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
                 }
             }
 
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (UseQAbility != null)
+                UseQAbility();
         }
     }
 }

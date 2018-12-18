@@ -24,7 +24,7 @@ public class SpiderBig : Unit {
 
     private void SpawnLitteSpiders() {
         foreach (var tr in _SpawnTransforms) {
-            var spider = Instantiate(LittleSpiderPrefab, tr.position, tr.rotation);
+            Instantiate(LittleSpiderPrefab, tr.position, tr.rotation);
         }
     }
 

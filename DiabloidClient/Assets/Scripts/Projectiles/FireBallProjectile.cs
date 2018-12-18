@@ -2,4 +2,4 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBallProjectile : SelfDirectingProjectile { }
+public class FireBallProjectile : DirectedProjectile { }

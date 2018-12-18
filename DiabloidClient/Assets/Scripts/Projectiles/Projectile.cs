@@ -8,12 +8,12 @@ public abstract class Projectile : MonoBehaviour {
     protected Vector3 _Velocity;
     protected bool _Initialized;
 
-    protected virtual void Update() {
+    protected virtual void FixedUpdate() {
         if (!_Initialized) {
             //gameObject.SetActive(false);
             return;
         }
-        SimulateStep(Time.deltaTime);
+        SimulateStep(Time.fixedDeltaTime);
         if (_Velocity != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(_Velocity);
     }

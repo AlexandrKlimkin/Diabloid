@@ -86,12 +86,12 @@ public class Actor : MonoBehaviour, IDamagable, ICameraTarget {
     }
     protected virtual void OnMiddleDamageTake() {
         if (!string.IsNullOrEmpty(MiddleDamageHitEffectName)) {
-            var effect = VisualEffect.GetEffect<ParticleEffect>(MiddleDamageHitEffectName);
-            effect.transform.position = PointToFire.position;
-            effect.transform.rotation = PointToFire.rotation;
+            //var effect = VisualEffect.GetEffect<ParticleEffect>(MiddleDamageHitEffectName);
+            //effect.transform.position = PointToFire.position;
+            //effect.transform.rotation = PointToFire.rotation;
             //effect.Parent = PointToFire;
             //effect.ResetLocalPosition();
-            effect.Play();
+            //effect.Play();
         }
         if (!Dead) {
             Animator.SetTrigger("TakeMiddleDamage");

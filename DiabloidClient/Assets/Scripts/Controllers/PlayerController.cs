@@ -8,12 +8,15 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public MoveController MoveController { get; private set; }
     public AttackController AttackController { get; private set; }
 
+    public PowerArrowAbility PowerArrowAbility { get; private set; }  // КОСТЫЛЬ
+
     private InputSystem _Input;
 
     protected override void Awake () {
         base.Awake();
         Unit = GetComponent<Unit>();
         MoveController = GetComponentInChildren<MoveController>();
+        PowerArrowAbility = GetComponentInChildren<PowerArrowAbility>();
     }
 	
     protected void Start() {
@@ -21,6 +24,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         _Input = InputSystem.Instance;
         _Input.TouchGroundHit += MoveToGroundHitPoint;
         _Input.TouchActorHit += AttackTarget;
+        _Input.UseQAbility += UseQAbility;
     }
 
     private void Update() {
@@ -39,6 +43,14 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         AttackController.Target = actor;
     }
 
+    private void UseQAbility()
+    {
+        var mouseHit = _Input.CameraRaycastHit;
+        var dir = Vector3.Scale(mouseHit.point - Unit.transform.position, new Vector3(1,0,1));
+        PowerArrowAbility.Direction = dir;
+        PowerArrowAbility.UseAbility();
+    }
+
     private void PursueOrAttackTarget() {
         if(AttackController.Target != null) {
             var sqrDistToTarget = Unit.AttackController.SqrDistanceToTarget;
@@ -55,6 +67,8 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     protected override void OnDestroy() {
         _Input.TouchGroundHit -= MoveToGroundHitPoint;
+        _Input.TouchActorHit -= AttackTarget;
+        _Input.UseQAbility -= UseQAbility;
         base.OnDestroy();
     }
 }
