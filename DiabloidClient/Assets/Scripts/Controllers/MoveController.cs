@@ -99,8 +99,13 @@ public class MoveController : MonoBehaviour {
     public void ForceLookAt(Actor actor) {
         if (actor == null)
             return;
-        var view = Vector3.Scale(actor.transform.position - Owner.transform.position, new Vector3(1, 0, 1));
-        _TargetRotation = Quaternion.LookRotation(view, Vector3.up);
+        var dir = Vector3.Scale(actor.transform.position - Owner.transform.position, new Vector3(1,0,1));
+        ForceLookAt(dir);
+    }
+
+    public void ForceLookAt(Vector3 direction)
+    {
+        _TargetRotation = Quaternion.LookRotation(direction, Vector3.up);
     }
 
     public void OnHit() {

@@ -3400,63 +3400,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 3.9999995, z: 5.9999995}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &371475602
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 100004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_Name
-      value: FireSplashEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 52dd769f34e1ae94c9171c06735bf43d, type: 3}
 --- !u!4 &528874889 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 481542, guid: 017a76921cbfb3a47a27c7b6dc2fd216,
@@ -13676,6 +13619,11 @@ PrefabInstance:
     - target: {fileID: 4228889268227690, guid: 213f320e72363be44beaf39e6560fc50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114234326297064644, guid: 213f320e72363be44beaf39e6560fc50,
+        type: 3}
+      propertyPath: AngularSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 880897888, guid: 213f320e72363be44beaf39e6560fc50, type: 3}
       propertyPath: MaxDistance
