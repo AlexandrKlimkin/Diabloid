@@ -3644,6 +3644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4672024570251238}
   - component: {fileID: 114657046756473628}
+  - component: {fileID: 880897888}
   m_Layer: 10
   m_Name: Weapons
   m_TagString: Untagged
@@ -3681,6 +3682,23 @@ MonoBehaviour:
   Range: 10
   ReloadTime: 1
   ProjectileSpawnPoint: {fileID: 4974383526479372}
+--- !u!114 &880897888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824744127003576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aeebe45850000f4db0d47f2e3123e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectileSpawnPoint: {fileID: 4974383526479372}
+  Damage: 50
+  ExplosionRadius: 3
+  MaxDistance: 10.58
+  Direction: {x: 0, y: 0, z: 0}
 --- !u!1 &1837406338567152
 GameObject:
   m_ObjectHideFlags: 0

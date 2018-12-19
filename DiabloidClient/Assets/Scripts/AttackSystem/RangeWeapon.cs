@@ -12,6 +12,7 @@ public class RangeWeapon : Weapon {
         if (Controller.Target == null)
             return;
         var projectile = ArrowProjectilePool.Instance.GetObject();
+        projectile.gameObject.SetActive(true);
         projectile.transform.position = ProjectileSpawnPoint.position;
         projectile.transform.rotation = ProjectileSpawnPoint.rotation;
         var dmg = new Damage(Damage, Controller.Owner, DamageType.Middle);

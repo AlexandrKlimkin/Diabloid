@@ -46,7 +46,18 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     private void UseQAbility()
     {
         var mouseHit = _Input.CameraRaycastHit;
-        var dir = Vector3.Scale(mouseHit.point - Unit.transform.position, new Vector3(1,0,1));
+        var targetPoint = mouseHit.point;
+        if(mouseHit.transform == null)
+        {
+            var plane = new Plane(Unit.transform.up, Unit.transform.position);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var enter = 0f;
+            if (plane.Raycast(ray, out enter))
+            {
+                targetPoint = ray.GetPoint(enter);
+            }
+        }
+        var dir = Vector3.Scale(targetPoint - Unit.transform.position, new Vector3(1,0,1));
         PowerArrowAbility.Direction = dir;
         PowerArrowAbility.UseAbility();
     }

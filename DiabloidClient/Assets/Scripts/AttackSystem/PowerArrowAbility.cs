@@ -18,7 +18,8 @@ public class PowerArrowAbility : Ability
 
     public override void UseAbility()
     {
-        var projectile = FireBallsPool.Instance.GetObject();
+        var projectile = ArrowBlastProjectilePool.Instance.GetObject();
+        projectile.gameObject.SetActive(true);
         projectile.transform.position = ProjectileSpawnPoint.position;
         projectile.transform.rotation = ProjectileSpawnPoint.rotation;
         var dmg = new Damage(Damage, Owner, DamageType.Middle);

@@ -24,7 +24,7 @@ public abstract class MonoBehaviourObjectPool<PoolType, ObjectType> : SingletonB
         if(freeObj == null) {
             freeObj = AddObject();
         }
-        freeObj.gameObject.SetActive(true);
+        //freeObj.gameObject.SetActive(true);
         return freeObj;
     }
 
