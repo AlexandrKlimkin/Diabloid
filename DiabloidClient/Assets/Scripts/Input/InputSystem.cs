@@ -10,6 +10,8 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
     public event Action<Vector3> TouchGroundHit;
     public event Action<Actor> TouchActorHit;
     public event Action UseQAbility;
+    public event Action RotateCameraRight;
+    public event Action RotateCameraLeft;
 
     public RaycastHit CameraRaycastHit {
         get {
@@ -31,7 +33,6 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
                 var hitObj = hit.collider.gameObject;
 
                 if (Constants.Layers.Masks.Ground == (Constants.Layers.Masks.Ground | (1 << hitObj.layer))) {
-                    //if (LayerMask. hitObj.layer == Constants.Layers.Masks.Ground) {
                     if (TouchGroundHit != null)
                         TouchGroundHit(hit.point);
                 }
@@ -43,10 +44,20 @@ public class InputSystem : SingletonBehaviour<InputSystem> {
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (UseQAbility != null)
                 UseQAbility();
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (RotateCameraLeft != null)
+                RotateCameraLeft();
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            if (RotateCameraRight != null)
+                RotateCameraRight();
         }
     }
 }

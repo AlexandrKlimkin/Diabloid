@@ -12,13 +12,15 @@ public class CameraBehaviour : SingletonBehaviour<CameraBehaviour> {
     [SerializeField]
     private float _DefaultDistance;
     [SerializeField]
-    private float _DefaultAngle;
+    private float _DefaultAngleX;
     [SerializeField]
-    private float _DefaultAngleRot;
+    private float _TargetAngleY;
     [SerializeField]
     private float _MoveSmoothness;
     [SerializeField]
     private float _RotateSmothness;
+    [SerializeField]
+    private float _ForceRotateSmothness;
 
     public ICameraTarget Target { get; set; }
 
@@ -31,6 +33,8 @@ public class CameraBehaviour : SingletonBehaviour<CameraBehaviour> {
 
     void Start() {
         Target = PlayerController.Instance.Unit;
+        InputSystem.Instance.RotateCameraLeft += RotateLeftAroundTarget;
+        InputSystem.Instance.RotateCameraRight += RotateRightAroundTarget;
     }
 
     void Update() {
@@ -46,7 +50,23 @@ public class CameraBehaviour : SingletonBehaviour<CameraBehaviour> {
     }
 
     private void ProcessRotate() {
-        var targetRotation = Quaternion.Euler(_DefaultAngle, _DefaultAngleRot, 0);
+        var targetRotation = Quaternion.Euler(_DefaultAngleX, _TargetAngleY, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _RotateSmothness);
+    }
+
+    private void RotateAroundTarget(bool right)
+    {
+        var sideCof = right ? 1 : -1;
+        _TargetAngleY += Time.deltaTime * _ForceRotateSmothness * sideCof;
+    }
+
+    private void RotateRightAroundTarget()
+    {
+        RotateAroundTarget(true);
+    }
+
+    private void RotateLeftAroundTarget()
+    {
+        RotateAroundTarget(false);
     }
 }
