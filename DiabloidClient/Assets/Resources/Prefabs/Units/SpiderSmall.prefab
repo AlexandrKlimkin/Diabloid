@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHealth: 40
-  TeamIndex: 0
+  TeamIndex: 1
 --- !u!114 &114861576689010072
 MonoBehaviour:
   m_ObjectHideFlags: 0

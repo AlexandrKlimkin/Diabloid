@@ -40,8 +40,8 @@ public abstract class Scheduler<T, S> : SingletonBehaviour<T> where T : MonoBeha
                 _AccumulatedObjectFraction = fracPart;
 
                 for (int i = 0; i < intPart; i++) {
-                    if (_CurrentUpdateIndex > RegistrySize - 1)
-                        break;
+                    //if (_CurrentUpdateIndex > RegistrySize - 1)
+                    //    break;
 
                     if (_CurrentUpdateIndex < _Registry.Count) {
                         UpdateObject(_Registry[_CurrentUpdateIndex]);

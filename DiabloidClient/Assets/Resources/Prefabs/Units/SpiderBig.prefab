@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MaxHealth: 100
-  TeamIndex: 0
+  TeamIndex: 1
   LittleSpiderPrefab: {fileID: 1024027586228416, guid: ddb0fa50161409646a8a7ba9f186e3d9,
     type: 3}
 --- !u!114 &114861576689010072
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0008a4d43454d964fb98d0a7f1056d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 15
+  Range: 150
   HitTime: 1
   AttackTime: 3
 --- !u!114 &114590721938337716

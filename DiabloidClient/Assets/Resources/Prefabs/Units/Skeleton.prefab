@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0008a4d43454d964fb98d0a7f1056d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 15
+  Range: 150
   HitTime: 1
   AttackTime: 3
 --- !u!114 &114822690471539726

@@ -32,7 +32,7 @@ public class FPScounter : MonoBehaviour {
 		{
 			// display two fractional digits (f2 format)
 			float fps = accum/frames;
-			string format = System.String.Format("{0:F2} FPS",fps);
+            string format = Mathf.Round(fps).ToString();
 			textFpsCounter.text = format;	
 
 			timeleft = updateInterval;

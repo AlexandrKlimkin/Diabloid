@@ -2833,8 +2833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 0
-  HitTime: 0.11
-  AttackTime: 0
 --- !u!114 &114234326297064644
 MonoBehaviour:
   m_ObjectHideFlags: 0
