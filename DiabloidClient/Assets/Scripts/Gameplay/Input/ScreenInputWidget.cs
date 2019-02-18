@@ -40,8 +40,6 @@ public class ScreenInputWidget : MonoBehaviour, IPointerDownHandler, IPointerUpH
 #if UNITY_EDITOR || UNITY_STANDALONE
         _PreviousMousePos = Input.mousePosition;
 #endif
-
-        Debug.Log(CurrentTouchDelta);
     }
 
     private void OnDisable() {
