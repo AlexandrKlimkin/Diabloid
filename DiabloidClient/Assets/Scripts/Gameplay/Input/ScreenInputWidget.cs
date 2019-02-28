@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class ScreenInputWidget : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
 
     public Vector2 CurrentTouchDelta { get; private set; }
+    public Vector2 ScrollDelta { get; private set; }
 
 #if UNITY_EDITOR || UNITY_STANDALONE
     private const float MouseSpeed = 0.45f;
@@ -39,6 +40,7 @@ public class ScreenInputWidget : MonoBehaviour, IPointerDownHandler, IPointerUpH
         CurrentTouchDelta = Vector2.Lerp(CurrentTouchDelta, _TargetTouchDelta, Time.deltaTime * 15);
 #if UNITY_EDITOR || UNITY_STANDALONE
         _PreviousMousePos = Input.mousePosition;
+        ScrollDelta = Input.mouseScrollDelta;
 #endif
     }
 
